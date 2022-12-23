@@ -8,7 +8,8 @@ type PropsType = {
     callBack: (newTitle: string) => void
 }
 
-export const Input = (props: PropsType) => {
+export const Input = React.memo ((props: PropsType) => {
+    console.log('Input')
     let [title, setTitle] = useState("")
     let [error, setError] = useState<string | null>(null)
 
@@ -27,7 +28,10 @@ export const Input = (props: PropsType) => {
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null);
+        if (error)
+        {
+            setError(null);
+        }
         if (e.charCode === 13) {
             addTask();
         }
@@ -53,5 +57,5 @@ export const Input = (props: PropsType) => {
             {/*{error && <div className="error-message">{error}</div>}*/}
         </div>
     );
-};
+})
 
